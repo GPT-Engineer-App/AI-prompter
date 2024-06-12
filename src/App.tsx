@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const App: React.FC = () => {
   useEffect(() => {
     // Set up authentication with the OpenAI API
-    const openai = new OpenAI({
+    new OpenAI({
       apiKey: process.env.REACT_APP_OPENAI_API_KEY,
     });
     
