@@ -1,15 +1,32 @@
-// Complete the Index page component here
-// Use chakra-ui
-import { Button } from "@chakra-ui/react"; // example
-import { FaPlus } from "react-icons/fa"; // example - use react-icons/fa for icons
+import { Button } from "@chakra-ui/react";
+import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
+import openai from "openai";
 
 const Index = () => {
-  // TODO: Create the website here!
+  const [response, setResponse] = useState("");
+
+  const generatePrompt = async () => {
+    try {
+      const result = await openai.Completion.create({
+        model: "text-davinci-003",
+        prompt: "Generate a prompt template for an AI model.",
+        max_tokens: 100,
+      });
+      setResponse(result.choices[0].text);
+    } catch (error) {
+      console.error("Error generating prompt:", error);
+    }
+  };
+
   return (
-    <Button>
-      Hello world! <FaPlus />
-    </Button>
-  ); // example
+    <div>
+      <Button onClick={generatePrompt}>
+        Generate Prompt <FaPlus />
+      </Button>
+      <div>{response}</div>
+    </div>
+  );
 };
 
 export default Index;
