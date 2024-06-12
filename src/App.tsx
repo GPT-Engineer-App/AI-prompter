@@ -1,13 +1,16 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Index from "./pages/Index";
-import openai from "openai";
+import { Configuration, OpenAIApi } from "openai";
 import { useEffect } from "react";
 
 const App: React.FC = () => {
   useEffect(() => {
     // Set up authentication with the OpenAI API
-    openai.apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+    const configuration = new Configuration({
+      apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+    });
+    const openai = new OpenAIApi(configuration);
   }, []);
 
   return (
